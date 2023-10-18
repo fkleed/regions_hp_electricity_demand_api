@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 class RegionRecordBase(BaseModel):
     nuts3_code: str
-    time: str
+    date_iso: str
     hourly_electricity_demand: float
 
     class Config:
