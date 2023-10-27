@@ -31,19 +31,19 @@ def get_db():
 
 
 @app.get("/nuts-3/{region_code}/{heat_option}", response_model=list[schemas.NUTS3RegionRecordBase])
-def read_region_hp_electricity_demands(region_code: str, heat_option: HeatOption, db: Session = Depends(get_db)):
+def get_hourly_heat_pump_electricity_demand_for_single_nuts3_region(region_code: str, heat_option: HeatOption, db: Session = Depends(get_db)):
     if heat_option == HeatOption.COLDSHANDHW:
-        region_hp_electricity_demands = crud.get_records_for_nuts3_cold(db, region_code=region_code)
+        region_hp_electricity_demands = crud.get_records_for_single_nuts3_cold(db, region_code=region_code)
     elif heat_option == HeatOption.COLDSHONLY:
-        region_hp_electricity_demands = crud.get_records_for_nuts3_space_heat_only_cold(db, region_code=region_code)
+        region_hp_electricity_demands = crud.get_records_for_single_nuts3_space_heat_only_cold(db, region_code=region_code)
     elif heat_option == HeatOption.REFERENCESHANDHW:
-        region_hp_electricity_demands = crud.get_records_for_nuts3_reference(db, region_code=region_code)
+        region_hp_electricity_demands = crud.get_records_for_single_nuts3_reference(db, region_code=region_code)
     elif heat_option == HeatOption.REFERENCESHONLY:
-        region_hp_electricity_demands = crud.get_records_for_nuts3_space_heat_only_reference(db, region_code=region_code)
+        region_hp_electricity_demands = crud.get_records_for_single_nuts3_space_heat_only_reference(db, region_code=region_code)
     elif heat_option == HeatOption.HOTSHANDHW:
-        region_hp_electricity_demands = crud.get_records_for_nuts3_hot(db, region_code=region_code)
+        region_hp_electricity_demands = crud.get_records_for_single_nuts3_hot(db, region_code=region_code)
     elif heat_option == HeatOption.HOTSHONLY:
-        region_hp_electricity_demands = crud.get_records_for_nuts3_space_heat_only_hot(db, region_code=region_code)
+        region_hp_electricity_demands = crud.get_records_for_single_nuts3_space_heat_only_hot(db, region_code=region_code)
     else:
         region_hp_electricity_demands = []
     return region_hp_electricity_demands
