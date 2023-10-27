@@ -2,6 +2,30 @@ from sqlalchemy.orm import Session
 
 from models import *
 
+
+# For single nuts-1 region
+# For the cold temperature series
+def get_records_for_single_nuts1_cold(db: Session, region_code: str):
+    return db.query(NUTS1RegionRecordCold).filter(NUTS1RegionRecordCold.nuts1_code == region_code)
+
+def get_records_for_single_nuts1_space_heat_only_cold(db: Session, region_code: str):
+    return db.query(NUTS1RegionRecordSHOnlyCold).filter(NUTS1RegionRecordSHOnlyCold.nuts1_code == region_code)
+
+# For the reference temperature series
+def get_records_for_single_nuts1_reference(db: Session, region_code: str):
+    return db.query(NUTS1RegionRecordReference).filter(NUTS1RegionRecordReference.nuts1_code == region_code)
+
+def get_records_for_single_nuts1_space_heat_only_reference(db: Session, region_code: str):
+    return db.query(NUTS1RegionRecordSHOnlyReference).filter(NUTS1RegionRecordSHOnlyReference.nuts1_code == region_code)
+
+# For the hot temperature series
+def get_records_for_single_nuts1_hot(db: Session, region_code: str):
+    return db.query(NUTS1RegionRecordHot).filter(NUTS1RegionRecordHot.nuts1_code == region_code)
+
+def get_records_for_single_nuts1_space_heat_only_hot(db: Session, region_code: str):
+    return db.query(NUTS1RegionRecordSHOnlyHot).filter(NUTS1RegionRecordSHOnlyHot.nuts1_code == region_code)
+
+
 # For single nuts-3 region
 # For the cold temperature series
 def get_records_for_single_nuts3_cold(db: Session, region_code: str):

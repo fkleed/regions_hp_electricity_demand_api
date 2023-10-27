@@ -1,5 +1,5 @@
 from enum import Enum
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI
 from sqlalchemy.orm import Session
 
 
@@ -28,6 +28,25 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+@app.get("/nuts-1/{region_code}/{heat_option}", response_model=list[schemas.NUTS1RegionRecordBase])
+def get_hourly_heat_pump_electricity_demand_for_single_nuts1_region(region_code: str, heat_option: HeatOption, db: Session = Depends(get_db)):
+    if heat_option == HeatOption.COLDSHANDHW:
+        region_hp_electricity_demands = crud.get_records_for_single_nuts1_cold(db, region_code=region_code)
+    elif heat_option == HeatOption.COLDSHONLY:
+        region_hp_electricity_demands = crud.get_records_for_single_nuts1_space_heat_only_cold(db, region_code=region_code)
+    elif heat_option == HeatOption.REFERENCESHANDHW:
+        region_hp_electricity_demands = crud.get_records_for_single_nuts1_reference(db, region_code=region_code)
+    elif heat_option == HeatOption.REFERENCESHONLY:
+        region_hp_electricity_demands = crud.get_records_for_single_nuts1_space_heat_only_reference(db, region_code=region_code)
+    elif heat_option == HeatOption.HOTSHANDHW:
+        region_hp_electricity_demands = crud.get_records_for_single_nuts1_hot(db, region_code=region_code)
+    elif heat_option == HeatOption.HOTSHONLY:
+        region_hp_electricity_demands = crud.get_records_for_single_nuts1_space_heat_only_hot(db, region_code=region_code)
+    else:
+        region_hp_electricity_demands = []
+    return region_hp_electricity_demands
 
 
 @app.get("/nuts-3/{region_code}/{heat_option}", response_model=list[schemas.NUTS3RegionRecordBase])
