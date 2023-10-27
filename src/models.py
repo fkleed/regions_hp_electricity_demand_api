@@ -2,6 +2,44 @@ from sqlalchemy import Column, String, Numeric
 
 from database import Base
 
+# For Germany
+class GermanyRecordCold(Base):
+    __tablename__ = "germany_cold_sh_and_hw"
+
+    date_iso = Column(String(20), primary_key=True)
+    hourly_electricity_demand = Column(Numeric)
+
+class GermanyRecordSHOnlyCold(Base):
+    __tablename__ = "germany_cold_sh_only"
+
+    date_iso = Column(String(20), primary_key=True)
+    hourly_electricity_demand = Column(Numeric)   
+
+class GermanyRecordReference(Base):
+    __tablename__ = "germany_reference_sh_and_hw"
+
+    date_iso = Column(String(20), primary_key=True)
+    hourly_electricity_demand = Column(Numeric)
+
+class GermanyRecordSHOnlyReference(Base):
+    __tablename__ = "germany_reference_sh_only"
+
+    date_iso = Column(String(20), primary_key=True)
+    hourly_electricity_demand = Column(Numeric)
+
+class GermanyRecordHot(Base):
+    __tablename__ = "germany_hot_sh_and_hw"
+
+    date_iso = Column(String(20), primary_key=True)
+    hourly_electricity_demand = Column(Numeric)
+
+class GermanyRecordSHOnlyHot(Base):
+    __tablename__ = "germany_hot_sh_only"
+
+    date_iso = Column(String(20), primary_key=True)
+    hourly_electricity_demand = Column(Numeric)
+    
+
 # For nuts-1 regions
 class NUTS1RegionRecordCold(Base):
     __tablename__ = "nuts1_cold_sh_and_hw"

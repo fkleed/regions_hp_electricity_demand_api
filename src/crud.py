@@ -2,6 +2,28 @@ from sqlalchemy.orm import Session
 
 from models import *
 
+# For Germany
+# For the cold temperature series
+def get_records_for_germany_cold(db: Session):
+    return db.query(GermanyRecordCold)
+
+def get_records_for_germany_space_heat_only_cold(db: Session):
+    return db.query(GermanyRecordSHOnlyCold)
+
+# For the reference temperature series
+def get_records_for_germany_reference(db: Session):
+    return db.query(GermanyRecordReference)
+
+def get_records_for_germany_space_heat_only_reference(db: Session):
+    return db.query(GermanyRecordSHOnlyReference)
+
+# For the hot temperature series
+def get_records_for_germany_hot(db: Session):
+    return db.query(GermanyRecordHot)
+
+def get_records_for_germany_space_heat_only_hot(db: Session):
+    return db.query(GermanyRecordSHOnlyHot)
+
 
 # For single nuts-1 region
 # For the cold temperature series
