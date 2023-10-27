@@ -1,25 +1,28 @@
 from sqlalchemy.orm import Session
 
-from models import RegionRecordReference, RegionRecordCold, RegionRecordHot, RegionRecordSHOnlyReference, RegionRecordSHOnlyCold, RegionRecordSHOnlyHot
+from models import *
 
-# For space heating and hot water together
-def get_records_for_region_reference(db: Session, region_code: str):
-    return db.query(RegionRecordReference).filter(RegionRecordReference.nuts3_code == region_code)
+# For the nuts-3 regions
 
-def get_records_for_region_cold(db: Session, region_code: str):
-    return db.query(RegionRecordCold).filter(RegionRecordCold.nuts3_code == region_code)
+# For the cold temperature series
+def get_records_for_nuts3_cold(db: Session, region_code: str):
+    return db.query(NUTS3RegionRecordCold).filter(NUTS3RegionRecordCold.nuts3_code == region_code)
 
-def get_records_for_region_hot(db: Session, region_code: str):
-    return db.query(RegionRecordHot).filter(RegionRecordHot.nuts3_code == region_code)
-
-
-# For space heating only
-def get_records_for_region_space_heat_only_reference(db: Session, region_code: str):
-    return db.query(RegionRecordSHOnlyReference).filter(RegionRecordSHOnlyReference.nuts3_code == region_code)
-
-def get_records_for_region_space_heat_only_cold(db: Session, region_code: str):
-    return db.query(RegionRecordSHOnlyCold).filter(RegionRecordSHOnlyCold.nuts3_code == region_code)
+def get_records_for_nuts3_space_heat_only_cold(db: Session, region_code: str):
+    return db.query(NUTS3RegionRecordSHOnlyCold).filter(NUTS3RegionRecordSHOnlyCold.nuts3_code == region_code)
 
 
-def get_records_for_region_space_heat_only_hot(db: Session, region_code: str):
-    return db.query(RegionRecordSHOnlyHot).filter(RegionRecordSHOnlyHot.nuts3_code == region_code)
+# For the reference temperature series
+def get_records_for_nuts3_reference(db: Session, region_code: str):
+    return db.query(NUTS3RegionRecordReference).filter(NUTS3RegionRecordReference.nuts3_code == region_code)
+
+def get_records_for_nuts3_space_heat_only_reference(db: Session, region_code: str):
+    return db.query(NUTS3RegionRecordSHOnlyReference).filter(NUTS3RegionRecordSHOnlyReference.nuts3_code == region_code)
+
+
+# For the hot temperature series
+def get_records_for_nuts3_hot(db: Session, region_code: str):
+    return db.query(NUTS3RegionRecordHot).filter(NUTS3RegionRecordHot.nuts3_code == region_code)
+
+def get_records_for_nuts3_space_heat_only_hot(db: Session, region_code: str):
+    return db.query(NUTS3RegionRecordSHOnlyHot).filter(NUTS3RegionRecordSHOnlyHot.nuts3_code == region_code)
